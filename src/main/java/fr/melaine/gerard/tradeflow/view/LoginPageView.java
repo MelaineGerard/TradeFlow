@@ -9,6 +9,7 @@ public class LoginPageView extends JFrame {
     JTextField usernameField;
     JPasswordField passwordField;
     JButton loginButton;
+    JButton quitButton;
     HomePageView homePageView;
 
     public LoginPageView() {
@@ -29,7 +30,7 @@ public class LoginPageView extends JFrame {
         MigLayout miglayout = new MigLayout(
                 "hidemode 3",
                 "[grow][fill][grow]",
-                "[grow][fill][fill][fill][fill][grow]");
+                "[grow][fill][fill][fill][fill][fill][grow]");
 
         panel.setLayout(miglayout);
 
@@ -62,10 +63,15 @@ public class LoginPageView extends JFrame {
             }
         });
 
+        quitButton = new JButton("Quitter");
+        quitButton.setFont(quitButton.getFont().deriveFont(24.0f));
+        quitButton.addActionListener(e -> System.exit(0));
+
         panel.add(label, "cell 1 1");
         panel.add(usernameField, "cell 1 2");
         panel.add(passwordField, "cell 1 3");
         panel.add(loginButton, "cell 1 4");
+        panel.add(quitButton, "cell 1 5");
         this.setContentPane(panel);
     }
 }
