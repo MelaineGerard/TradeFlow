@@ -62,6 +62,11 @@ public class HomePageView extends JFrame {
             this.dispose();
         });
 
+        manageButton.addActionListener(e -> {
+            new ManageHomePageView(this);
+            this.dispose();
+        });
+
         this.setContentPane(panel);
     }
 }

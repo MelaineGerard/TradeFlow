@@ -4,14 +4,13 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 
-public class SellHomePageView extends JFrame {
+public class SellPageView extends JFrame {
 
     private final JFrame parent;
-    private DaySellReportPageView daySellReportPageView;
-    private SellPageView sellPageView;
+    private SellRecapPageView sellRecapPageView;
 
-    public SellHomePageView(JFrame parent) {
-        super("TradeFlow - Sell Home");
+    public SellPageView(JFrame parent) {
+        super("TradeFlow - Sell Page");
         this.parent = parent;
 
         initPanel();
@@ -31,38 +30,26 @@ public class SellHomePageView extends JFrame {
 
         panel.setLayout(miglayout);
 
-        JLabel label = new JLabel("Que veux-tu faire, " + "admin" + " !");
+        JLabel label = new JLabel("Vendre");
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setFont(label.getFont().deriveFont(48.0f));
         label.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
-        JButton sellButton = new JButton("Vendre");
+        JButton sellButton = new JButton("Passer à la vente");
         sellButton.setFont(sellButton.getFont().deriveFont(24.0f));
 
-        JButton generateSellerRapportButton = new JButton("Générer ton rapport de vente");
-        generateSellerRapportButton.setFont(sellButton.getFont().deriveFont(24.0f));
-
         JButton backButton = new JButton("Retour à l'accueil");
-        backButton.setFont(sellButton.getFont().deriveFont(24.0f));
+        backButton.setFont(backButton.getFont().deriveFont(24.0f));
 
         panel.add(label, "cell 1 1");
-        panel.add(sellButton, "cell 1 2");
-        panel.add(generateSellerRapportButton, "cell 1 3");
+        panel.add(sellButton, "cell 1 3");
         panel.add(backButton, "cell 1 4");
 
         sellButton.addActionListener(e -> {
-            if (this.sellPageView == null) {
-                this.sellPageView = new SellPageView(this);
+            if (sellRecapPageView == null) {
+                this.sellRecapPageView = new SellRecapPageView(this);
             }
-            this.sellPageView.setVisible(true);
-            this.setVisible(false);
-        });
-
-        generateSellerRapportButton.addActionListener(e -> {
-            if (this.daySellReportPageView == null) {
-                this.daySellReportPageView = new DaySellReportPageView(this);
-            }
-            this.daySellReportPageView.setVisible(true);
+            sellRecapPageView.setVisible(true);
             this.setVisible(false);
         });
 
