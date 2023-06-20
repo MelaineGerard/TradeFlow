@@ -16,7 +16,7 @@ public class LoginPageView extends JFrame {
     HomePageView homePageView;
 
     public LoginPageView() {
-        super("TradeFlow - Login");
+        super("TradeFlow - Se connecter");
 
         initPanel();
 

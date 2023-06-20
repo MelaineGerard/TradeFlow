@@ -9,7 +9,7 @@ public class DaySellReportPageView extends JFrame {
     private final JFrame parent;
 
     public DaySellReportPageView(JFrame parent) {
-        super("TradeFlow - Sell Home");
+        super("TradeFlow - Page de rapport de vente du jour");
         this.parent = parent;
 
         initPanel();

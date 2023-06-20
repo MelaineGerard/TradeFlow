@@ -10,7 +10,7 @@ public class ManageHomePageView extends JFrame {
     private final JFrame parent;
 
     public ManageHomePageView(JFrame parent) {
-        super("TradeFlow - Manage Home Page");
+        super("TradeFlow - Page d'accueil de gestion");
         this.parent = parent;
 
         initPanel();

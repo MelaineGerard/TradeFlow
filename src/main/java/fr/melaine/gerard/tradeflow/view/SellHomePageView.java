@@ -13,7 +13,7 @@ public class SellHomePageView extends JFrame {
     private SellPageView sellPageView;
 
     public SellHomePageView(JFrame parent) {
-        super("TradeFlow - Sell Home");
+        super("TradeFlow - Page d'accueil de vente");
         this.parent = parent;
 
         initPanel();

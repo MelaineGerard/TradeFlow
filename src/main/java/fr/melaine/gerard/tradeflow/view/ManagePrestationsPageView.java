@@ -30,8 +30,8 @@ public class ManagePrestationsPageView extends JFrame {
 
         panel.setLayout(miglayout);
 
-        JButton newUserButton = new JButton("Créer un utilisateur");
-        JLabel usersLabel = new JLabel("Utilisateurs");
+        JButton newUserButton = new JButton("Créer une prestation");
+        JLabel usersLabel = new JLabel("Prestations");
         usersLabel.setFont(usersLabel.getFont().deriveFont(20.0f));
         
         JScrollPane prestationsScrollPane = new JScrollPane();

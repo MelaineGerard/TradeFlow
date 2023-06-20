@@ -10,7 +10,7 @@ public class SellPageView extends JFrame {
     private SellRecapPageView sellRecapPageView;
 
     public SellPageView(JFrame parent) {
-        super("TradeFlow - Sell Page");
+        super("TradeFlow - Page de vente");
         this.parent = parent;
 
         initPanel();

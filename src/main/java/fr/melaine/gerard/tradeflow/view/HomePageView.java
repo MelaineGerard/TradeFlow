@@ -16,7 +16,7 @@ public class HomePageView extends JFrame {
     JFrame parent;
 
     public HomePageView(JFrame parent) {
-        super("TradeFlow - Home");
+        super("TradeFlow - Accueil");
         this.parent = parent;
         initPanel();
         this.setSize(800, 600);
