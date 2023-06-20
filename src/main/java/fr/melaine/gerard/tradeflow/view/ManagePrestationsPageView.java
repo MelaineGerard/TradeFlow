@@ -3,6 +3,9 @@ package fr.melaine.gerard.tradeflow.view;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+import fr.melaine.gerard.tradeflow.TradeFlow;
 
 public class ManagePrestationsPageView extends JFrame {
     private final JFrame parent;
@@ -23,18 +26,41 @@ public class ManagePrestationsPageView extends JFrame {
         MigLayout miglayout = new MigLayout(
                 "hidemode 3",
                 "[grow][fill][grow]",
-                "[grow][fill][grow]");
+                "[fill][fill][grow][fill]");
 
         panel.setLayout(miglayout);
 
-        JButton newUserButton = new JButton("Créer une prestation");
-        JLabel usersLabel = new JLabel("Prestations");
+        JButton newUserButton = new JButton("Créer un utilisateur");
+        JLabel usersLabel = new JLabel("Utilisateurs");
         usersLabel.setFont(usersLabel.getFont().deriveFont(20.0f));
+        
+        JScrollPane prestationsScrollPane = new JScrollPane();
+        JTable prestationsTable = new JTable();
+        DefaultTableModel prestationsTableModel = new DefaultTableModel();
+        prestationsTableModel.addColumn("Id");
+        prestationsTableModel.addColumn("Nom");
+        prestationsTableModel.addColumn("Prix");
+        prestationsTableModel.addColumn("Actions");
+        prestationsTable.setModel(prestationsTableModel);
+        // ajout des prestations
+        TradeFlow.getPrestations().forEach(prestation -> {
+            prestationsTableModel.addRow(new Object[] {
+                    prestation.getId(),
+                    prestation.getName(),
+                    prestation.getPrice(),
+                    "Modifier | Supprimer"
+            });
+        });
+
+        prestationsScrollPane.setViewportView(prestationsTable);
+
         JButton backButton = new JButton("Retour");
 
+        // ajout sur la première ligne
         panel.add(newUserButton, "cell 1 0");
         panel.add(usersLabel, "cell 1 1");
-        panel.add(backButton, "cell 1 2");
+        panel.add(prestationsScrollPane, "cell 1 2");
+        panel.add(backButton, "cell 1 3");
 
         backButton.addActionListener(e -> {
             this.setVisible(false);

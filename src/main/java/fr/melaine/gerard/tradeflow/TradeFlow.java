@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.melaine.gerard.tradeflow.model.Client;
+import fr.melaine.gerard.tradeflow.model.Prestation;
 import fr.melaine.gerard.tradeflow.model.User;
 import fr.melaine.gerard.tradeflow.view.LoginPageView;
 
@@ -11,11 +12,13 @@ public class TradeFlow {
     private static User user;
     private static List<User> users;
     private static List<Client> clients;
+    private static List<Prestation> prestations;
 
     public static void main(String[] args) {
         user = null;
         users = new ArrayList<>();
         clients = new ArrayList<>();
+        prestations = new ArrayList<>();
 
         new LoginPageView();
     }
@@ -50,5 +53,17 @@ public class TradeFlow {
 
     public static void removeClient(Client client) {
         clients.remove(client);
+    }
+
+    public static List<Prestation> getPrestations() {
+        return prestations;
+    }
+
+    public static void addPrestation(Prestation prestation) {
+        prestations.add(prestation);
+    }
+
+    public static void removePrestation(Prestation prestation) {
+        prestations.remove(prestation);
     }
 }

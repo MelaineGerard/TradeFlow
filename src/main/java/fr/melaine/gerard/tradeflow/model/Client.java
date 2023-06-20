@@ -1,14 +1,20 @@
 package fr.melaine.gerard.tradeflow.model;
 
 public class Client {
+    private final int id;
     private String name;
     private String address;
     private String city;
 
-    public Client(String name, String address, String city) {
+    public Client(int id, String name, String address, String city) {
+        this.id = id;
         this.name = name;
         this.address = address;
         this.city = city;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getAddress() {

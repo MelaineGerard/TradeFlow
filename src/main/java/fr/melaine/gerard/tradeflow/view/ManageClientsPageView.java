@@ -37,14 +37,16 @@ public class ManageClientsPageView extends JFrame {
         JScrollPane clientsScrollPane = new JScrollPane();
         JTable clientsTable = new JTable();
         DefaultTableModel clientsTableModel = new DefaultTableModel();
+        clientsTableModel.addColumn("Id");
         clientsTableModel.addColumn("Nom");
         clientsTableModel.addColumn("Adresse");
         clientsTableModel.addColumn("Ville");
         clientsTableModel.addColumn("Actions");
         clientsTable.setModel(clientsTableModel);
-        // ajout des utilisateurs
+        // ajout des clients
         TradeFlow.getClients().forEach(client -> {
             clientsTableModel.addRow(new Object[] {
+                    client.getId(),
                     client.getName(),
                     client.getAddress(),
                     client.getCity(),

@@ -54,12 +54,8 @@ public class LoginPageView extends JFrame {
         loginButton.setFont(loginButton.getFont().deriveFont(24.0f));
         loginButton.addActionListener(e -> {
             if (usernameField.getText().equals("admin") && new String(passwordField.getPassword()).equals("admin")) {
-                User user = new User("Melaine Gérard", "admin", "admin", "admin");
+                User user = new User(1, "Melaine Gérard", "admin", "admin", "admin");
                 TradeFlow.setUser(user);
-                TradeFlow.addUser(user);
-                TradeFlow.addUser(user);
-                TradeFlow.addUser(user);
-                TradeFlow.addUser(user);
 
                 JOptionPane.showMessageDialog(this, "Bienvenue " + user.getName(), "Bienvenue",
                         JOptionPane.INFORMATION_MESSAGE);

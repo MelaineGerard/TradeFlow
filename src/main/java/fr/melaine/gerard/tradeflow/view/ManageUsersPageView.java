@@ -37,6 +37,7 @@ public class ManageUsersPageView extends JFrame {
         JScrollPane usersScrollPane = new JScrollPane();
         JTable usersTable = new JTable();
         DefaultTableModel usersTableModel = new DefaultTableModel();
+        usersTableModel.addColumn("Id");
         usersTableModel.addColumn("Nom");
         usersTableModel.addColumn("Pseudo");
         usersTableModel.addColumn("Rôle");
@@ -45,6 +46,7 @@ public class ManageUsersPageView extends JFrame {
         // ajout des utilisateurs
         TradeFlow.getUsers().forEach(user -> {
             usersTableModel.addRow(new Object[] {
+                    user.getId(),
                     user.getName(),
                     user.getUsername(),
                     user.getRole(),
