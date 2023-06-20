@@ -65,6 +65,21 @@ public class ManageHomePageView extends JFrame {
             new ManageUsersPageView(this);
         });
 
+        manageClientsButton.addActionListener(e -> {
+            this.setVisible(false);
+            new ManageClientsPageView(this);
+        });
+
+        managePrestationButton.addActionListener(e -> {
+            this.setVisible(false);
+            new ManagePrestationsPageView(this);
+        });
+
+        manageSellReportButton.addActionListener(e -> {
+            this.setVisible(false);
+            new ManageSellReportPageView(this);
+        });
+
         this.setContentPane(panel);
     }
 }
