@@ -50,4 +50,12 @@ public class LoadApiService {
             new PaymentMethod(3, "Chèque")
         );
     }
+
+    public void loadSellReports() {
+        // TODO: Faire un call à l'api pour récupérer les rapports de vente
+    }
+
+    public void loadTransactions() {
+        // TODO: Faire un call à l'api pour récupérer les transactions
+    }
 }
