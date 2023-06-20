@@ -53,20 +53,23 @@ public class LoginPageView extends JFrame {
         loginButton = new JButton("Se connecter");
         loginButton.setFont(loginButton.getFont().deriveFont(24.0f));
         loginButton.addActionListener(e -> {
-            if (usernameField.getText().equals("admin") && new String(passwordField.getPassword()).equals("admin")) {
-                User user = new User(1, "Melaine Gérard", "admin", "admin", "admin");
-                TradeFlow.setUser(user);
-
-                JOptionPane.showMessageDialog(this, "Bienvenue " + user.getName(), "Bienvenue",
-                        JOptionPane.INFORMATION_MESSAGE);
-                this.dispose();
-                if (homePageView == null) {
-                    homePageView = new HomePageView(this);
-                } else {
-                    homePageView.setVisible(true);
+            for (User user : TradeFlow.getUsers()) {
+                if (usernameField.getText().equals(user.getUsername()) && new String(passwordField.getPassword()).equals(user.getPassword())) {
+                    TradeFlow.setUser(user);
+                    JOptionPane.showMessageDialog(this, "Bienvenue " + user.getName(), "Bienvenue",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                    if (homePageView == null) {
+                        homePageView = new HomePageView(this);
+                    } else {
+                        homePageView.setVisible(true);
+                    }
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Mauvais identifiants", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+
+            if (TradeFlow.getUser() == null) {
+                JOptionPane.showMessageDialog(this, "Nom d'utilisateur ou mot de passe incorrect", "Erreur",
+                        JOptionPane.ERROR_MESSAGE);
             }
         });
 

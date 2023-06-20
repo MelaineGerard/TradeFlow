@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.melaine.gerard.tradeflow.model.Client;
+import fr.melaine.gerard.tradeflow.model.PaymentMethod;
 import fr.melaine.gerard.tradeflow.model.Prestation;
 import fr.melaine.gerard.tradeflow.model.User;
+import fr.melaine.gerard.tradeflow.service.LoadApiService;
 import fr.melaine.gerard.tradeflow.view.LoginPageView;
 
 public class TradeFlow {
@@ -13,12 +15,19 @@ public class TradeFlow {
     private static List<User> users;
     private static List<Client> clients;
     private static List<Prestation> prestations;
+    private static List<PaymentMethod> paymentMethods;
 
     public static void main(String[] args) {
         user = null;
         users = new ArrayList<>();
         clients = new ArrayList<>();
         prestations = new ArrayList<>();
+        paymentMethods = new ArrayList<>();
+        LoadApiService.getInstance().loadUsers();
+        LoadApiService.getInstance().loadClients();
+        LoadApiService.getInstance().loadPrestations();
+        LoadApiService.getInstance().loadPaymentMethods();
+    
 
         new LoginPageView();
     }
@@ -65,5 +74,17 @@ public class TradeFlow {
 
     public static void removePrestation(Prestation prestation) {
         prestations.remove(prestation);
+    }
+
+    public static List<PaymentMethod> getPaymentMethods() {
+        return paymentMethods;
+    }
+
+    public static void addPaymentMethod(PaymentMethod paymentMethod) {
+        paymentMethods.add(paymentMethod);
+    }
+
+    public static void removePaymentMethod(PaymentMethod paymentMethod) {
+        paymentMethods.remove(paymentMethod);
     }
 }
