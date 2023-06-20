@@ -50,7 +50,7 @@ public class LoginPageView extends JFrame {
         loginButton = new JButton("Se connecter");
         loginButton.setFont(loginButton.getFont().deriveFont(24.0f));
         loginButton.addActionListener(e -> {
-            if (usernameField.getText().equals("admin") && passwordField.getText().equals("admin")) {
+            if (usernameField.getText().equals("admin") && new String(passwordField.getPassword()).equals("admin")) {
                 JOptionPane.showMessageDialog(this, "Bienvenue " + usernameField.getText(), "Bienvenue", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
                 if (homePageView == null) {
