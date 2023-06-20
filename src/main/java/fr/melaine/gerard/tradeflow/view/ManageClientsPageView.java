@@ -3,6 +3,9 @@ package fr.melaine.gerard.tradeflow.view;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+import fr.melaine.gerard.tradeflow.TradeFlow;
 
 public class ManageClientsPageView extends JFrame {
     private final JFrame parent;
@@ -23,19 +26,41 @@ public class ManageClientsPageView extends JFrame {
         MigLayout miglayout = new MigLayout(
                 "hidemode 3",
                 "[grow][fill][grow]",
-                "[grow][fill][grow]");
+                "[fill][fill][grow][fill]");
 
         panel.setLayout(miglayout);
 
         JButton newUserButton = new JButton("Créer un client");
         JLabel usersLabel = new JLabel("Clients");
         usersLabel.setFont(usersLabel.getFont().deriveFont(20.0f));
+
+        JScrollPane clientsScrollPane = new JScrollPane();
+        JTable clientsTable = new JTable();
+        DefaultTableModel clientsTableModel = new DefaultTableModel();
+        clientsTableModel.addColumn("Nom");
+        clientsTableModel.addColumn("Adresse");
+        clientsTableModel.addColumn("Ville");
+        clientsTableModel.addColumn("Actions");
+        clientsTable.setModel(clientsTableModel);
+        // ajout des utilisateurs
+        TradeFlow.getClients().forEach(client -> {
+            clientsTableModel.addRow(new Object[] {
+                    client.getName(),
+                    client.getAddress(),
+                    client.getCity(),
+                    "Modifier | Supprimer"
+            });
+        });
+
+        clientsScrollPane.setViewportView(clientsTable);
+
         JButton backButton = new JButton("Retour");
 
         // ajout sur la première ligne
         panel.add(newUserButton, "cell 1 0");
         panel.add(usersLabel, "cell 1 1");
-        panel.add(backButton, "cell 1 2");
+        panel.add(clientsScrollPane, "cell 1 2");
+        panel.add(backButton, "cell 1 3");
 
         backButton.addActionListener(e -> {
             this.setVisible(false);

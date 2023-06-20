@@ -25,7 +25,7 @@ public class ManageUsersPageView extends JFrame {
         JPanel panel = new JPanel();
         MigLayout miglayout = new MigLayout(
                 "hidemode 3",
-                "[fill][grow][fill]",
+                "[grow][fill][grow]",
                 "[fill][fill][grow][fill]");
 
         panel.setLayout(miglayout);
@@ -33,6 +33,7 @@ public class ManageUsersPageView extends JFrame {
         JButton newUserButton = new JButton("Créer un utilisateur");
         JLabel usersLabel = new JLabel("Utilisateurs");
         usersLabel.setFont(usersLabel.getFont().deriveFont(20.0f));
+        
         JScrollPane usersScrollPane = new JScrollPane();
         JTable usersTable = new JTable();
         DefaultTableModel usersTableModel = new DefaultTableModel();
