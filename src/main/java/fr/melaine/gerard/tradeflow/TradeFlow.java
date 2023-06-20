@@ -1,7 +1,9 @@
 package fr.melaine.gerard.tradeflow;
 
+import fr.melaine.gerard.tradeflow.view.LoginPageView;
+
 public class TradeFlow {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        new LoginPageView();
     }
 }
