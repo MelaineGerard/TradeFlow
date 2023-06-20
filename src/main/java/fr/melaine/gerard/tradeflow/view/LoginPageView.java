@@ -3,6 +3,9 @@ package fr.melaine.gerard.tradeflow.view;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 
+import fr.melaine.gerard.tradeflow.TradeFlow;
+import fr.melaine.gerard.tradeflow.model.User;
+
 public class LoginPageView extends JFrame {
     JPanel panel;
     JLabel label;
@@ -51,7 +54,11 @@ public class LoginPageView extends JFrame {
         loginButton.setFont(loginButton.getFont().deriveFont(24.0f));
         loginButton.addActionListener(e -> {
             if (usernameField.getText().equals("admin") && new String(passwordField.getPassword()).equals("admin")) {
-                JOptionPane.showMessageDialog(this, "Bienvenue " + usernameField.getText(), "Bienvenue", JOptionPane.INFORMATION_MESSAGE);
+                User user = new User("Melaine Gérard", "admin", "admin", "admin");
+                TradeFlow.setUser(user);
+
+                JOptionPane.showMessageDialog(this, "Bienvenue " + user.getName(), "Bienvenue",
+                        JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
                 if (homePageView == null) {
                     homePageView = new HomePageView(this);

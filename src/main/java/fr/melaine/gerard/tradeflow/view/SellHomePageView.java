@@ -4,6 +4,8 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 
+import fr.melaine.gerard.tradeflow.TradeFlow;
+
 public class SellHomePageView extends JFrame {
 
     private final JFrame parent;
@@ -31,9 +33,9 @@ public class SellHomePageView extends JFrame {
 
         panel.setLayout(miglayout);
 
-        JLabel label = new JLabel("Que veux-tu faire, " + "admin" + " !");
+        JLabel label = new JLabel("Que veux-tu faire, " + TradeFlow.getUser().getName() + " !");
         label.setHorizontalAlignment(JLabel.CENTER);
-        label.setFont(label.getFont().deriveFont(48.0f));
+        label.setFont(label.getFont().deriveFont(30.0f));
         label.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
 
         JButton sellButton = new JButton("Vendre");
