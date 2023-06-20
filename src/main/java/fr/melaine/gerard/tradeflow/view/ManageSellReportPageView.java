@@ -20,7 +20,6 @@ public class ManageSellReportPageView extends JFrame {
 
     public void initPanel() {
         JPanel panel = new JPanel();
-        // TODO: MigLayout 3 colonnes et 3 lignes
         MigLayout miglayout = new MigLayout(
                 "hidemode 3",
                 "[grow][fill][grow]",

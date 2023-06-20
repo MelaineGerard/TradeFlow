@@ -56,6 +56,10 @@ public class LoginPageView extends JFrame {
             if (usernameField.getText().equals("admin") && new String(passwordField.getPassword()).equals("admin")) {
                 User user = new User("Melaine Gérard", "admin", "admin", "admin");
                 TradeFlow.setUser(user);
+                TradeFlow.addUser(user);
+                TradeFlow.addUser(user);
+                TradeFlow.addUser(user);
+                TradeFlow.addUser(user);
 
                 JOptionPane.showMessageDialog(this, "Bienvenue " + user.getName(), "Bienvenue",
                         JOptionPane.INFORMATION_MESSAGE);
