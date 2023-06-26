@@ -5,6 +5,7 @@ import javax.swing.*;
 
 import fr.melaine.gerard.tradeflow.TradeFlow;
 import fr.melaine.gerard.tradeflow.model.User;
+import fr.melaine.gerard.tradeflow.service.UserService;
 
 public class LoginPageView extends JFrame {
     JPanel panel;
@@ -53,10 +54,21 @@ public class LoginPageView extends JFrame {
         loginButton = new JButton("Se connecter");
         loginButton.setFont(loginButton.getFont().deriveFont(24.0f));
         loginButton.addActionListener(e -> {
-            for (User user : TradeFlow.getUsers()) {
-                if (usernameField.getText().equals(user.getUsername()) && new String(passwordField.getPassword()).equals(user.getPassword())) {
-                    TradeFlow.setUser(user);
-                    JOptionPane.showMessageDialog(this, "Bienvenue " + user.getName(), "Bienvenue",
+                if(UserService.login(usernameField.getText(), new String(passwordField.getPassword()))) {
+                    User currentUser = null;
+                    for (User usr : TradeFlow.getUsers()) {
+                        if(currentUser == null && usr.getUsername().equals(usernameField.getText()))
+                            currentUser = usr;
+                    }
+                    if(currentUser == null) {
+                        JOptionPane.showMessageDialog(this, "Nom d'utilisateur ou mot de passe incorrect", "Erreur",
+                                JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+
+                    TradeFlow.setUser(currentUser);
+                    JOptionPane.showMessageDialog(this, "Bienvenue " + currentUser.getName(), "Bienvenue",
                             JOptionPane.INFORMATION_MESSAGE);
                     this.dispose();
                     if (homePageView == null) {
@@ -65,7 +77,6 @@ public class LoginPageView extends JFrame {
                         homePageView.setVisible(true);
                     }
                 }
-            }
 
             if (TradeFlow.getUser() == null) {
                 JOptionPane.showMessageDialog(this, "Nom d'utilisateur ou mot de passe incorrect", "Erreur",

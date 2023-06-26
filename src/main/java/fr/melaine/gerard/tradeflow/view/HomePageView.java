@@ -51,7 +51,10 @@ public class HomePageView extends JFrame {
 
         panel.add(label, "cell 1 1");
         panel.add(sellButton, "cell 1 2");
+        if (TradeFlow.getUser().isAdmin()) {
         panel.add(manageButton, "cell 1 3");
+
+        }
         panel.add(disconnectButton, "cell 1 4");
 
         disconnectButton.addActionListener(e -> {

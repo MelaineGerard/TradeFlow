@@ -2,14 +2,18 @@ package fr.melaine.gerard.tradeflow.view;
 
 import net.miginfocom.swing.MigLayout;
 
+import java.io.IOException;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import fr.melaine.gerard.tradeflow.TradeFlow;
+import fr.melaine.gerard.tradeflow.service.LoadApiService;
+import fr.melaine.gerard.tradeflow.view.dialog.CreateUserDialog;
 
 public class ManageUsersPageView extends JFrame {
     private final JFrame parent;
-
+    private JTable usersTable;
     public ManageUsersPageView(JFrame parent) {
         super("TradeFlow - Gestion des utilisateurs");
         this.parent = parent;
@@ -35,24 +39,9 @@ public class ManageUsersPageView extends JFrame {
         usersLabel.setFont(usersLabel.getFont().deriveFont(20.0f));
         
         JScrollPane usersScrollPane = new JScrollPane();
-        JTable usersTable = new JTable();
-        DefaultTableModel usersTableModel = new DefaultTableModel();
-        usersTableModel.addColumn("Id");
-        usersTableModel.addColumn("Nom");
-        usersTableModel.addColumn("Pseudo");
-        usersTableModel.addColumn("Rôle");
-        usersTableModel.addColumn("Actions");
-        usersTable.setModel(usersTableModel);
-        // ajout des utilisateurs
-        TradeFlow.getUsers().forEach(user -> {
-            usersTableModel.addRow(new Object[] {
-                    user.getId(),
-                    user.getName(),
-                    user.getUsername(),
-                    user.getRole(),
-                    "Modifier | Supprimer"
-            });
-        });
+        usersTable = new JTable();
+        
+        refresh();
 
         usersScrollPane.setViewportView(usersTable);
 
@@ -69,6 +58,38 @@ public class ManageUsersPageView extends JFrame {
             this.parent.setVisible(true);
         });
 
+        newUserButton.addActionListener(e -> {
+            new CreateUserDialog(this);
+            this.setVisible(false);
+        });
+
+
         this.setContentPane(panel);
+    }
+
+    public void refresh() {
+        try {
+            LoadApiService.getInstance().loadUsers();
+            DefaultTableModel usersTableModel = new DefaultTableModel();
+            usersTableModel.addColumn("Id");
+            usersTableModel.addColumn("Nom");
+            usersTableModel.addColumn("Pseudo");
+            usersTableModel.addColumn("Rôle");
+            usersTableModel.addColumn("Actions");
+            usersTable.setModel(usersTableModel);
+
+            TradeFlow.getUsers().forEach(user -> {
+                usersTableModel.addRow(new Object[] {
+                        user.getId(),
+                        user.getName(),
+                        user.getUsername(),
+                        user.getRole(),
+                        "Modifier | Supprimer"
+                });
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
 }

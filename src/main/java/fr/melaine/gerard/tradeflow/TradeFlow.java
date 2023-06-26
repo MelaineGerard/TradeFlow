@@ -1,7 +1,10 @@
 package fr.melaine.gerard.tradeflow;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.Gson;
 
 import fr.melaine.gerard.tradeflow.model.Client;
 import fr.melaine.gerard.tradeflow.model.PaymentMethod;
@@ -21,7 +24,7 @@ public class TradeFlow {
     private static List<SellReport> sellReports;
     private static List<Transaction> transactions;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         user = null;
         users = new ArrayList<>();
         clients = new ArrayList<>();
@@ -120,4 +123,9 @@ public class TradeFlow {
     public static void removeTransaction(Transaction transaction) {
         transactions.remove(transaction);
     }
+
+    public static Gson getGson() {
+        return new Gson();
+    }
+
 }
