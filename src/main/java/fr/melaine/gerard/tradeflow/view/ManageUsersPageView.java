@@ -75,7 +75,6 @@ public class ManageUsersPageView extends JFrame {
             usersTableModel.addColumn("Nom");
             usersTableModel.addColumn("Pseudo");
             usersTableModel.addColumn("Rôle");
-            usersTableModel.addColumn("Actions");
             usersTable.setModel(usersTableModel);
 
             TradeFlow.getUsers().forEach(user -> {
@@ -83,8 +82,7 @@ public class ManageUsersPageView extends JFrame {
                         user.getId(),
                         user.getName(),
                         user.getUsername(),
-                        user.getRole(),
-                        "Modifier | Supprimer"
+                        user.getRole()
                 });
             });
         } catch (IOException e) {

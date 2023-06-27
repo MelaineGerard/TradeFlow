@@ -63,15 +63,14 @@ public class CreateUserDialog extends JDialog {
 
         createButton.addActionListener(e -> {
             User user = new User(
-                0, 
-                usernameField.getText(),
-                new String(passwordField.getPassword()),
-                fullNameField.getText(),
-                roleComboBox.getSelectedItem().toString()
+                0,
+                    fullNameField.getText(),
+                    usernameField.getText(),
+                    new String(passwordField.getPassword()),
+                    roleComboBox.getSelectedItem().toString()
                 );
 
             if (UserService.createUser(user)) {
-
                 this.setVisible(false);
                 this.parent.setVisible(true);
                 this.parent.refresh();

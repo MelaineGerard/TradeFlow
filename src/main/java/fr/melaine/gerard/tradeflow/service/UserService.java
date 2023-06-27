@@ -23,7 +23,7 @@ public class UserService {
 
         Request request = new Request.Builder()
             .post(body)
-            .url("https://localhost:8000/api/users/login")
+            .url("http://localhost:8000/api/users/login")
             .build();
 
         try (Response response = getHttpClient().newCall(request).execute()) {
@@ -51,7 +51,7 @@ public class UserService {
 
         Request request = new Request.Builder()
             .post(body)
-            .url("https://localhost:8000/api/users/create")
+            .url("http://localhost:8000/api/users/create")
             .build();
 
         try (Response response = getHttpClient().newCall(request).execute()) {

@@ -26,7 +26,7 @@ public class LoadApiService {
 
     public void loadUsers() throws IOException {
         Request request = new Request.Builder()
-            .url("https://localhost:8000/api/users")
+            .url("http://localhost:8000/api/users")
             .build();
 
         Response response = getHttpClient().newCall(request).execute();

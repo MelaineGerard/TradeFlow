@@ -58,6 +58,7 @@ public class HomePageView extends JFrame {
         panel.add(disconnectButton, "cell 1 4");
 
         disconnectButton.addActionListener(e -> {
+            TradeFlow.setUser(null);
             parent.setVisible(true);
             this.dispose();
         });
