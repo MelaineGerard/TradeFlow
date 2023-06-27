@@ -74,4 +74,20 @@ public class UserService {
             return false;
         }
     }
+
+    public static boolean editUser(User user) {
+        String json = TradeFlow.getGson().toJson(user);
+        RequestBody body = RequestBody.create(json, JSON);
+
+        Request request = new Request.Builder()
+                .put(body)
+                .url("http://localhost:8000/api/users/edit/" + user.getId())
+                .build();
+
+        try (Response response = getHttpClient().newCall(request).execute()) {
+            return response.isSuccessful() && response.code() == 201;
+        } catch (IOException e) {
+            return false;
+        }
+    }
 }

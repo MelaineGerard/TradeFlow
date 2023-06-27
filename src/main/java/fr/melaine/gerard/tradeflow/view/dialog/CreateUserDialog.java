@@ -16,10 +16,12 @@ import net.miginfocom.swing.MigLayout;
 
 public class CreateUserDialog extends JDialog {
     private final ManageUsersPageView parent;
+    private User user;
 
-    public CreateUserDialog(ManageUsersPageView parent) {
+    public CreateUserDialog(ManageUsersPageView parent, User user) {
         super();
         this.parent = parent;
+        this.user = user;
 
         initPanel();
         this.setSize(800, 600);
@@ -47,6 +49,13 @@ public class CreateUserDialog extends JDialog {
         roleComboBox.addItem("ROLE_ADMIN");
         roleComboBox.addItem("ROLE_USER");
 
+        if (user != null) {
+            usernameField.setText(user.getUsername());
+            fullNameField.setText(user.getName());
+            roleComboBox.setSelectedItem(user.getRole());
+        }
+
+
         panel.add(new JLabel("Nom d'utilisateur"), "cell 1 1");
         panel.add(usernameField, "cell 1 2");
         panel.add(new JLabel("Mot de passe"), "cell 1 3");
@@ -70,11 +79,21 @@ public class CreateUserDialog extends JDialog {
                     roleComboBox.getSelectedItem().toString()
                 );
 
-            if (UserService.createUser(user)) {
+            boolean isGood = false;
+
+            if (this.user != null) {
+                user.setId(this.user.getId());
+                isGood = UserService.editUser(user);
+            } else {
+                isGood = UserService.createUser(user);
+            }
+
+            if (isGood) {
                 this.setVisible(false);
                 this.parent.setVisible(true);
                 this.parent.refresh();
             }
+
 
         });
     }

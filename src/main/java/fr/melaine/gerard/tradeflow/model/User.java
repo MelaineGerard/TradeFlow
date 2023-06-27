@@ -1,7 +1,7 @@
 package fr.melaine.gerard.tradeflow.model;
 
 public class User {
-    private final int id;
+    private int id;
     private String name;
     private String username;
     private String password;
@@ -13,6 +13,10 @@ public class User {
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {

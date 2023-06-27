@@ -1,5 +1,6 @@
 package fr.melaine.gerard.tradeflow.view;
 
+import fr.melaine.gerard.tradeflow.model.User;
 import fr.melaine.gerard.tradeflow.service.UserService;
 import net.miginfocom.swing.MigLayout;
 
@@ -31,7 +32,7 @@ public class ManageUsersPageView extends JFrame {
         MigLayout miglayout = new MigLayout(
                 "hidemode 3",
                 "[grow][fill][grow]",
-                "[fill][fill][grow][fill][fill]");
+                "[fill][fill][grow][fill][fill][fill]");
 
         panel.setLayout(miglayout);
 
@@ -48,13 +49,15 @@ public class ManageUsersPageView extends JFrame {
 
         JButton backButton = new JButton("Retour");
         JButton deleteButton = new JButton("Supprimer");
+        JButton editButton = new JButton("Editer");
 
         // ajout sur la première ligne
         panel.add(newUserButton, "cell 1 0");
         panel.add(usersLabel, "cell 1 1");
         panel.add(usersScrollPane, "cell 1 2");
         panel.add(deleteButton, "cell 1 3");
-        panel.add(backButton, "cell 1 4");
+        panel.add(editButton, "cell 1 4");
+        panel.add(backButton, "cell 1 5");
 
         deleteButton.addActionListener(e -> {
             int selectedRow = usersTable.getSelectedRow();
@@ -74,8 +77,23 @@ public class ManageUsersPageView extends JFrame {
         });
 
         newUserButton.addActionListener(e -> {
-            new CreateUserDialog(this);
+            new CreateUserDialog(this, null);
             this.setVisible(false);
+        });
+
+        editButton.addActionListener(e -> {
+            int selectedRow = usersTable.getSelectedRow();
+
+            if (selectedRow != -1) {
+                int userId = (int) usersTable.getValueAt(selectedRow, 0);
+                String name = (String) usersTable.getValueAt(selectedRow, 1);
+                String username = (String) usersTable.getValueAt(selectedRow, 2);
+                String role = (String) usersTable.getValueAt(selectedRow, 3);
+
+                User user = new User(userId, name, username, null, role);
+                new CreateUserDialog(this, user);
+                this.setVisible(false);
+            }
         });
 
 
