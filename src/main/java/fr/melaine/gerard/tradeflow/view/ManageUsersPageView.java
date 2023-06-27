@@ -1,5 +1,6 @@
 package fr.melaine.gerard.tradeflow.view;
 
+import fr.melaine.gerard.tradeflow.service.UserService;
 import net.miginfocom.swing.MigLayout;
 
 import java.io.IOException;
@@ -30,7 +31,7 @@ public class ManageUsersPageView extends JFrame {
         MigLayout miglayout = new MigLayout(
                 "hidemode 3",
                 "[grow][fill][grow]",
-                "[fill][fill][grow][fill]");
+                "[fill][fill][grow][fill][fill]");
 
         panel.setLayout(miglayout);
 
@@ -46,12 +47,26 @@ public class ManageUsersPageView extends JFrame {
         usersScrollPane.setViewportView(usersTable);
 
         JButton backButton = new JButton("Retour");
+        JButton deleteButton = new JButton("Supprimer");
 
         // ajout sur la première ligne
         panel.add(newUserButton, "cell 1 0");
         panel.add(usersLabel, "cell 1 1");
         panel.add(usersScrollPane, "cell 1 2");
-        panel.add(backButton, "cell 1 3");
+        panel.add(deleteButton, "cell 1 3");
+        panel.add(backButton, "cell 1 4");
+
+        deleteButton.addActionListener(e -> {
+            int selectedRow = usersTable.getSelectedRow();
+            if(selectedRow != -1) {
+                int userId = (int) usersTable.getValueAt(selectedRow, 0);
+                if (UserService.deleteUser(userId)) {
+                    refresh();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Impossible de supprimer l'utilisateur", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
 
         backButton.addActionListener(e -> {
             this.setVisible(false);

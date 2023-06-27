@@ -60,4 +60,18 @@ public class UserService {
             return false;
         }
     }
+
+    public static boolean deleteUser(int userId) {
+
+        Request request = new Request.Builder()
+                .delete()
+                .url("http://localhost:8000/api/users/" + userId)
+                .build();
+
+        try (Response response = getHttpClient().newCall(request).execute()) {
+            return response.isSuccessful() && response.code() == 200;
+        } catch (IOException e) {
+            return false;
+        }
+    }
 }
