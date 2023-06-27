@@ -1,10 +1,10 @@
 package fr.melaine.gerard.tradeflow.model;
 
 public class Client {
-    private final int id;
+    private int id;
     private String name;
-    private String address;
-    private String city;
+    private final String address;
+    private final String city;
 
     public Client(int id, String name, String address, String city) {
         this.id = id;
@@ -17,6 +17,10 @@ public class Client {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -27,14 +31,6 @@ public class Client {
 
     public String getName() {
         return name;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public void setName(String name) {

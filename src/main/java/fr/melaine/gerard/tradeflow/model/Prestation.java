@@ -1,9 +1,9 @@
 package fr.melaine.gerard.tradeflow.model;
 
 public class Prestation {
-    private final int id;
+    private int id;
     private String name;
-    private float price;
+    private final float price;
 
     public Prestation(int id, String name, float price) {
         this.id = id;
@@ -14,6 +14,10 @@ public class Prestation {
 
     public int getId() {
         return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -28,8 +32,4 @@ public class Prestation {
         return this.price;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
-    }
-    
 }

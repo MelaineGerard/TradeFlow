@@ -7,7 +7,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import fr.melaine.gerard.tradeflow.TradeFlow;
+import fr.melaine.gerard.tradeflow.model.Client;
 import fr.melaine.gerard.tradeflow.model.PaymentMethod;
+import fr.melaine.gerard.tradeflow.model.Prestation;
 import fr.melaine.gerard.tradeflow.model.User;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -32,7 +34,7 @@ public class LoadApiService {
         Response response = getHttpClient().newCall(request).execute();
 
         if (response.isSuccessful()) {
-            String responseBody = response.body().string();
+            String responseBody = response.body() != null ? response.body().string() : null;
             JsonArray usersJsonArray = TradeFlow.getGson().fromJson(responseBody, JsonArray.class);
             TradeFlow.getUsers().clear();
 
@@ -58,18 +60,68 @@ public class LoadApiService {
         
     }
 
-    public void loadClients() {
-        // TODO: Faire un call à l'api pour récupérer les clients
+    public void loadClients() throws IOException {
+        Request request = new Request.Builder()
+                .url("http://localhost:8000/api/clients")
+                .build();
+
+        Response response = getHttpClient().newCall(request).execute();
+
+        if (response.isSuccessful()) {
+            String responseBody = response.body() != null ? response.body().string() : null;
+            JsonArray clientsJsonArray = TradeFlow.getGson().fromJson(responseBody, JsonArray.class);
+            TradeFlow.getClients().clear();
+
+            for (JsonElement jsonElement : clientsJsonArray) {
+                JsonObject userJsonObject = jsonElement.getAsJsonObject();
+                int id = userJsonObject.get("id").getAsInt();
+                String name = userJsonObject.get("name").getAsString();
+                String address = userJsonObject.get("address").getAsString();
+                String city = userJsonObject.get("city").getAsString();
+
+                Client client = new Client(
+                        id,
+                        name,
+                        address,
+                        city
+                );
+
+                TradeFlow.addClient(client);
+            }
+        }
 
     }
 
-    public void loadPrestations() {
-        // TODO: Faire un call à l'api pour récupérer les prestations
+    public void loadPrestations() throws IOException {
+        Request request = new Request.Builder()
+                .url("http://localhost:8000/api/prestations")
+                .build();
 
+        Response response = getHttpClient().newCall(request).execute();
+
+        if (response.isSuccessful()) {
+            String responseBody = response.body() != null ? response.body().string() : null;
+            JsonArray clientsJsonArray = TradeFlow.getGson().fromJson(responseBody, JsonArray.class);
+            TradeFlow.getPrestations().clear();
+
+            for (JsonElement jsonElement : clientsJsonArray) {
+                JsonObject userJsonObject = jsonElement.getAsJsonObject();
+                int id = userJsonObject.get("id").getAsInt();
+                String name = userJsonObject.get("name").getAsString();
+                float price = userJsonObject.get("price").getAsFloat();
+
+                Prestation prestation = new Prestation(
+                        id,
+                        name,
+                        price
+                );
+
+                TradeFlow.addPrestation(prestation);
+            }
+        }
     }
 
     public void loadPaymentMethods() {
-        // TODO: Faire un call à l'api pour récupérer les méthodes de paiement
         TradeFlow.addPaymentMethod(
             new PaymentMethod(1, "Carte bancaire")
         );
@@ -82,11 +134,9 @@ public class LoadApiService {
     }
 
     public void loadSellReports() {
-        // TODO: Faire un call à l'api pour récupérer les rapports de vente
     }
 
     public void loadTransactions() {
-        // TODO: Faire un call à l'api pour récupérer les transactions
     }
 
     private OkHttpClient getHttpClient() {
